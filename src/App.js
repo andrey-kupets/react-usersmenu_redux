@@ -1,9 +1,11 @@
 import RenderUserList from "./components/users-list/UserList";
+import { Route, Link } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-        <RenderUserList/>
+        <Link to={'/users'}>users</Link>
+        <Route path={'/users'} render={() => <RenderUserList/>}/>
     </div>
   );
 }
