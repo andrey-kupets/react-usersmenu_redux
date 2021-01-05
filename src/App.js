@@ -1,4 +1,4 @@
-import RenderUserList from "./components/users-list/UserList";
+import RenderUserList from "./components/users-list/UsersList";
 import { Route, Link } from "react-router-dom";
 
 function App() {
