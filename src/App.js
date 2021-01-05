@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
         <Link to={'/users'}>users</Link>
-        <Route path={'/users'} render={() => <RenderUserList/>}/>
+        <Route path={'/users'} component={RenderUserList}/>
     </div>
   );
 }
