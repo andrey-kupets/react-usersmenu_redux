@@ -1,6 +1,6 @@
 const initialState = {
     users: null,
-    asd: 'ho-ho'
+    // asd: 'ho-ho'
 }
 
 export default (state = initialState, action) => {

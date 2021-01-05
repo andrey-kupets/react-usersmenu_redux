@@ -1,37 +1,31 @@
 import './UserList.css';
-import {useDispatch, useSelector} from "react-redux";
-import React, {useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
 import actFetchApi from "../../service/fetch-api/ActFetchApi";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import RenderUser from "../user/User";
 
 function RenderUserList({match: {url}}) {
-
-    // const {users} = useSelector((state) => {
+const {users} = useSelector(({users_State: {users}}) => ({users}));
+// console.log(users)
+// const {users} = useSelector((state) => {
     //     console.log('useSelector');
-    //     console.log(state);
+    //     console.log(state.users);
     //     return state.users
     // });
-    const {users,asd} = useSelector(({users}) => {
-        console.log('useSelector');
-        console.log(users);
-        return users
-    });
+    // const {users,asd} = useSelector(({users}) => {
+    //     console.log('useSelector');
+    //     console.log(users);
+    //     return users
+    // });
 
-    console.log('users',users);
-    console.log('asd',asd);
+const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-
-        actFetchApi(url).then(users =>
-            dispatch({type: 'SET_USERS', payload: users}));
-
+useEffect(() => {
+    // const {match: {url}} = props;
+    actFetchApi(url).then(json => dispatch({type: 'SET_USERS', payload: json}));
     }, []);
-    console.log('----------------------');
-    console.log(!!users);
-    console.log('----------------------');
+
     return (
         <div className={'parent'}>
             <div>
