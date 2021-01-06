@@ -1,5 +1,5 @@
 export default function ProvideDetails(props) {
-    const {detailUserInfo} = props;
+    const {detailUserInfo, showEditUserWindow, deleteUser} = props;
     const {id, name, username, email, phone, website} = detailUserInfo;
     return (
         <div>
@@ -10,8 +10,8 @@ export default function ProvideDetails(props) {
             <div><span><u>Phone:</u></span> {phone}</div>
             <div><span><u>Website:</u></span> {website}</div>
             <div>
-                <button>Edit User</button>
-                <button>Delete User</button>
+                <button onClick={showEditUserWindow}>Edit User</button>
+                <button onClick={() => deleteUser(id)}>Delete User</button>
             </div>
 
         </div>

@@ -6,9 +6,10 @@ import { withRouter } from "react-router-dom";
 import RenderUser from "../user/User";
 import Loading from "../../service/loading/Loading";
 import ProvideDetails from "../detail-userinfo/DetailUserInfo";
+import EditUserWindow from "../editUser-window/EditUserWindow";
 
 function RenderUserList({match: {url}}) {
-const {users} = useSelector(({users_State: {users}}) => ({users}));
+    const {users} = useSelector(({users_State: {users}}) => ({users}));
 // console.log(users)
 // const {users} = useSelector((state) => {
 //         console.log('useSelector');
@@ -20,16 +21,29 @@ const {users} = useSelector(({users_State: {users}}) => ({users}));
     //     console.log(users);
     //     return users
     // });
-const {detailUserInfo} = useSelector(({detailUserInfo_State: {detailUserInfo}}) =>
-({detailUserInfo}));
+    const {detailUserInfo} = useSelector(({detailUserInfo_State: {detailUserInfo}}) =>
+    ({detailUserInfo}));
+    const {editUserWindow} = useSelector(({editUserWindow_State: {editUserWindow}}) =>
+    ({editUserWindow}));
 
-const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-const showDetails = (info) => {
-    dispatch({type: 'SET_DETAILS', payload: info})
-}
+    const showDetails = (info) => {
+        dispatch({type: 'SET_DETAILS', payload: info})
+    }
 
-useEffect(() => {
+    const showEditUserWindow = () => {
+        dispatch({type: 'EDITION_MENU_IS_VISIBLE', payload: 'visible'});
+    };
+
+    const deleteUser = (id) => {
+        const newUserList = users.filter(user => user.id !== id);
+        dispatch({type: 'SET_USERS', payload: newUserList});
+        dispatch({type: 'SET_DETAILS', payload: null});
+        dispatch({type: 'EDITION_MENU_IS_VISIBLE', payload: ''});
+    };
+
+    useEffect(() => {
     // const {match: {url}} = props;
     actFetchApi(url).then(json => dispatch({type: 'SET_USERS', payload: json}));
     }, []);
@@ -42,8 +56,8 @@ useEffect(() => {
                     {!!users && users.map(user => <RenderUser user={user} key={user.id} showDetails={showDetails}/>)}
                     <button>Create User</button>
                 </div>
-                {!!detailUserInfo && <ProvideDetails detailUserInfo={detailUserInfo}/>}
-                <div>1</div>
+                {!!detailUserInfo && <ProvideDetails detailUserInfo={detailUserInfo} showEditUserWindow={showEditUserWindow} deleteUser={deleteUser}/>}
+                {!!editUserWindow && <EditUserWindow detailUserInfo={detailUserInfo} />}
                 <div>1</div>
             </div>
         );
