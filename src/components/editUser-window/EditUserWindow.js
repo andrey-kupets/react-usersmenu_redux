@@ -1,33 +1,47 @@
+import { useDispatch, useSelector } from "react-redux";
+
 export  default function EditUserWindow(props) {
 
-const {detailUserInfo} = props;
+const {detailUserInfo, saveEditedUser} = props;
 const {name, username, email, phone, website} = detailUserInfo;
+    console.log(detailUserInfo);
+
+const {singleUser} = useSelector(({singleUser_State: {singleUser}}) => ({singleUser}))
+    // console.log(singleUser_State)
+    console.log(singleUser);
+const dispatch = useDispatch();
+
+const inputName = (e) => dispatch({type: 'INPUT_NAME', payload: e.target.value});
+const inputUsername = (e) => dispatch({type: 'INPUT_USERNAME', payload: e.target.value});
+const inputEmail = (e) => dispatch({type: 'INPUT_EMAIL', payload: e.target.value});
+const inputPhone = (e) => dispatch({type: 'INPUT_PHONE', payload: e.target.value});
+const inputWebsite = (e) => dispatch({type: 'INPUT_WEBSITE', payload: e.target.value});
 
     return (
         <div>
             <h3>USER EDITION MENU:</h3>
             <div>
                 <label>Name:</label>
-                <input  type="text" defaultValue={name}/>
+                <input onInput={inputName} type="text" defaultValue={name}/>
             </div>
             <div>
                 <label>UserName:</label>
-                <input type="text" defaultValue={username}/>
+                <input onInput={inputUsername} type="text" defaultValue={username}/>
             </div>
             <div>
                 <label>Email:</label>
-                <input type="text" defaultValue={email}/>
+                <input onInput={inputEmail} type="text" defaultValue={email}/>
             </div>
             <div>
                 <label>Phone:</label>
-                <input type="text" defaultValue={phone}/>
+                <input onInput={inputPhone} type="text" defaultValue={phone}/>
             </div>
             <div>
                 <label>Website:</label>
-                <input type="text" defaultValue={website}/>
+                <input onInput={inputWebsite} type="text" defaultValue={website}/>
             </div>
             <div>
-                <button >Save</button>
+                <button onClick={() => saveEditedUser('save', singleUser)}>Save</button>
                 <button >Cancel</button>
             </div>
         </div>

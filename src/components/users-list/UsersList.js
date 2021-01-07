@@ -16,11 +16,11 @@ function RenderUserList({match: {url}}) {
 //         console.log(state.users);
 //         return state.users
 //     });
-    // const {users,asd} = useSelector(({users}) => {
-    //     console.log('useSelector');
-    //     console.log(users);
-    //     return users
-    // });
+//     const {users,asd} = useSelector(({users}) => {
+//         console.log('useSelector');
+//         console.log(users);
+//         return users
+//     });
     const {detailUserInfo} = useSelector(({detailUserInfo_State: {detailUserInfo}}) =>
     ({detailUserInfo}));
     const {editUserWindow} = useSelector(({editUserWindow_State: {editUserWindow}}) =>
@@ -43,6 +43,16 @@ function RenderUserList({match: {url}}) {
         dispatch({type: 'EDITION_MENU_IS_VISIBLE', payload: ''});
     };
 
+    const saveEditedUser = (btnName, editedUser) => {
+        if (btnName === 'save') {
+            const newUserList = users.filter(user => user.id !== editedUser.id);
+            newUserList.push(editedUser);
+            console.log(newUserList)
+            dispatch({type: 'SET_USERS', payload: newUserList});
+
+        }
+    }
+
     useEffect(() => {
     // const {match: {url}} = props;
     actFetchApi(url).then(json => dispatch({type: 'SET_USERS', payload: json}));
@@ -57,7 +67,7 @@ function RenderUserList({match: {url}}) {
                     <button>Create User</button>
                 </div>
                 {!!detailUserInfo && <ProvideDetails detailUserInfo={detailUserInfo} showEditUserWindow={showEditUserWindow} deleteUser={deleteUser}/>}
-                {!!editUserWindow && <EditUserWindow detailUserInfo={detailUserInfo} />}
+                {!!editUserWindow && <EditUserWindow detailUserInfo={detailUserInfo} saveEditedUser={saveEditedUser}/>}
                 <div>1</div>
             </div>
         );
