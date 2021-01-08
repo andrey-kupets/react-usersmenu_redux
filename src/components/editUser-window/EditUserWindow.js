@@ -1,6 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
+import {
+    INPUT_NAME,
+    INPUT_USERNAME,
+    INPUT_EMAIL,
+    INPUT_PHONE,
+    INPUT_WEBSITE
+} from '../../redux/action-types';
 
-export  default function EditUserWindow(props) {
+export default function EditUserWindow(props) {
 
 const {detailUserInfo, saveEditedUser} = props;
 const {name, username, email, phone, website} = detailUserInfo;
@@ -11,11 +18,11 @@ const {singleUser} = useSelector(({singleUser_State: {singleUser}}) => ({singleU
     console.log(singleUser);
 const dispatch = useDispatch();
 
-const inputName = (e) => dispatch({type: 'INPUT_NAME', payload: e.target.value});
-const inputUsername = (e) => dispatch({type: 'INPUT_USERNAME', payload: e.target.value});
-const inputEmail = (e) => dispatch({type: 'INPUT_EMAIL', payload: e.target.value});
-const inputPhone = (e) => dispatch({type: 'INPUT_PHONE', payload: e.target.value});
-const inputWebsite = (e) => dispatch({type: 'INPUT_WEBSITE', payload: e.target.value});
+const inputName = (e) => dispatch({type: INPUT_NAME, payload: e.target.value});
+const inputUsername = (e) => dispatch({type: INPUT_USERNAME, payload: e.target.value});
+const inputEmail = (e) => dispatch({type: INPUT_EMAIL, payload: e.target.value});
+const inputPhone = (e) => dispatch({type: INPUT_PHONE, payload: e.target.value});
+const inputWebsite = (e) => dispatch({type: INPUT_WEBSITE, payload: e.target.value});
 
     return (
         <div>
