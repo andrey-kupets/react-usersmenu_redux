@@ -46,6 +46,8 @@ function RenderUserList({match: {url}}) {
 
     const saveEditedUser = (btnName, editedUser) => {
         if (btnName === 'save') {
+            console.log('editedUser saveEditedUser');
+            console.log(editedUser);
             const newUserList = users.filter(user => user.id !== editedUser.id);
             newUserList.push(editedUser);
             console.log(newUserList)
