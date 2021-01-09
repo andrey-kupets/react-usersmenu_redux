@@ -1,25 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useReducer } from 'react';
 
-import {
-    INPUT_NAME,
-    INPUT_USERNAME,
-    INPUT_EMAIL,
-    INPUT_PHONE,
-    INPUT_WEBSITE
-} from '../../redux/action-types';
-
+import { INPUT_NAME, INPUT_USERNAME, INPUT_EMAIL, INPUT_PHONE, INPUT_WEBSITE} from '../../redux/action-types';
+import {setNewName, setNewUsername, setNewEmail, setNewPhone, setNewWebsite} from '../../redux/action-creators';
 export default function EditUserWindow(props) {
 
-const {detailUserInfo, saveEditedUser} = props;
-const {name, username, email, phone, website} = detailUserInfo;
-    console.log(detailUserInfo)
+    const {detailUserInfo, saveEditedUser} = props;
+    const {name, username, email, phone, website} = detailUserInfo;
 
 // const {singleUser} = useSelector(({singleUser_State: {singleUser}}) => ({singleUser}))
 //     console.log(singleUser);
 // const dispatch = useDispatch();
 
 //todo зібрати юзіка тут і потім пхати у стор
+// todo неможна зробити це за допомогою 'redux', тільки {useReducer} from 'react'
 
     const editedUserReducer = (state, action) => {
         switch (action.type) {
@@ -33,11 +27,11 @@ const {name, username, email, phone, website} = detailUserInfo;
     };
     const [editedUser, dispatchEditedUser] = useReducer(editedUserReducer, detailUserInfo);
 
-    const inputName = (e) => dispatchEditedUser({type: INPUT_NAME, payload: e.target.value});
-    const inputUsername = (e) => dispatchEditedUser({type: INPUT_USERNAME, payload: e.target.value});
-    const inputEmail = (e) => dispatchEditedUser({type: INPUT_EMAIL, payload: e.target.value});
-    const inputPhone = (e) => dispatchEditedUser({type: INPUT_PHONE, payload: e.target.value});
-    const inputWebsite = (e) => dispatchEditedUser({type: INPUT_WEBSITE, payload: e.target.value});
+    const inputName = (e) => dispatchEditedUser(setNewName(e.target.value));
+    const inputUsername = (e) => dispatchEditedUser(setNewUsername(e.target.value));
+    const inputEmail = (e) => dispatchEditedUser(setNewEmail(e.target.value));
+    const inputPhone = (e) => dispatchEditedUser(setNewPhone(e.target.value));
+    const inputWebsite = (e) => dispatchEditedUser(setNewWebsite(e.target.value));
 
     return (
         <div>

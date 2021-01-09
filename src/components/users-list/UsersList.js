@@ -68,6 +68,8 @@ function RenderUserList({match: {url}}) {
             users.push(createdUser);
             dispatch(setUsers(users));
         } dispatch(setCreate(''));
+
+
     }
 
     useEffect(() => {
