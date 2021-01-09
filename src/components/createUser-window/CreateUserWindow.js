@@ -1,21 +1,15 @@
 import {useDispatch, useSelector} from "react-redux";
-import {
-    INPUT_NAME,
-    INPUT_USERNAME,
-    INPUT_EMAIL,
-    INPUT_PHONE,
-    INPUT_WEBSITE
-} from '../../redux/action-types';
+import {setNewName, setNewUsername, setNewEmail, setNewPhone, setNewWebsite} from "../../redux/action-creators";
 
 export default function CreateUserWindow({createUser}) {
     const singleUser = useSelector(({singleUser_State: {singleUser}}) => singleUser);
     const dispatch = useDispatch();
 
-    const inputName = (e) => dispatch({type: INPUT_NAME, payload: e.target.value});
-    const inputUsername = (e) => dispatch({type: INPUT_USERNAME, payload: e.target.value});
-    const inputEmail = (e) => dispatch({type: INPUT_EMAIL, payload: e.target.value});
-    const inputPhone = (e) => dispatch({type: INPUT_PHONE, payload: e.target.value});
-    const inputWebsite = (e) => dispatch({type: INPUT_WEBSITE, payload: e.target.value});
+    const inputName = (e) => dispatch(setNewName(e.target.value));
+    const inputUsername = (e) => dispatch(setNewUsername(e.target.value));
+    const inputEmail = (e) => dispatch(setNewEmail(e.target.value));
+    const inputPhone = (e) => dispatch(setNewPhone(e.target.value));
+    const inputWebsite = (e) => dispatch(setNewWebsite(e.target.value));
 
     return (
         <div>

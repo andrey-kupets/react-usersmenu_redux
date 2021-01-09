@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import users_State from './ApiReducer';
-import detailUserInfo_State from './DetailInfoReducer';
-import singleUser_State from './UserReducer';
-import editUserWindow_State from './EditReducer';
-import createUserWindow_State from './CreateReducer';
+import users_State from './apiReducer';
+import detailUserInfo_State from './detailInfoReducer';
+import singleUser_State from './userReducer';
+import editUserWindow_State from './editReducer';
+import createUserWindow_State from './createReducer';
 
 export const reducer = combineReducers({
     users_State,
