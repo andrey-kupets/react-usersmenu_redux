@@ -18,6 +18,7 @@ const {singleUser} = useSelector(({singleUser_State: {singleUser}}) => ({singleU
     console.log(singleUser);
 const dispatch = useDispatch();
 
+//todo зібрати юзіка тут і потім пхати у стор
 const inputName = (e) => dispatch({type: INPUT_NAME, payload: e.target.value});
 const inputUsername = (e) => dispatch({type: INPUT_USERNAME, payload: e.target.value});
 const inputEmail = (e) => dispatch({type: INPUT_EMAIL, payload: e.target.value});
