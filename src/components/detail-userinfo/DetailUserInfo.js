@@ -1,5 +1,5 @@
-export default function ProvideDetails(props) {
-    const {detailUserInfo, showEditUserWindow, deleteUser} = props;
+export default function ProvideDetails(detailUserInfo, showEditUserWindow, deleteUser) {
+    // const {detailUserInfo, showEditUserWindow, deleteUser} = props;
     const {id, name, username, email, phone, website} = detailUserInfo;
     return (
         <div>

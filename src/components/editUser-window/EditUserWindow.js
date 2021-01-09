@@ -3,9 +3,10 @@ import { useReducer } from 'react';
 
 import { INPUT_NAME, INPUT_USERNAME, INPUT_EMAIL, INPUT_PHONE, INPUT_WEBSITE} from '../../redux/action-types';
 import {setNewName, setNewUsername, setNewEmail, setNewPhone, setNewWebsite} from '../../redux/action-creators';
-export default function EditUserWindow(props) {
 
-    const {detailUserInfo, saveEditedUser} = props;
+export default function EditUserWindow({detailUserInfo, saveEditedUser}) {
+
+    // const {detailUserInfo, saveEditedUser} = props;
     const {name, username, email, phone, website} = detailUserInfo;
 
 // const {singleUser} = useSelector(({singleUser_State: {singleUser}}) => ({singleUser}))
