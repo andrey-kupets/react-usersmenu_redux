@@ -7,7 +7,14 @@ import {
 } from '../action-types';
 
 const initialState = {
-    singleUser: null
+    singleUser: {
+        id: '...missed data',
+        name: '...missed data',
+        username: '...missed data',
+        email: '...missed data',
+        phone: '...missed data',
+        website: '...missed data'
+    }
 }
 
 export default (state = initialState, action) => {

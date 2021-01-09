@@ -7,7 +7,8 @@ import RenderUser from "../user/User";
 import Loading from "../../service/loading/Loading";
 import ProvideDetails from "../detail-userinfo/DetailUserInfo";
 import EditUserWindow from "../editUser-window/EditUserWindow";
-import {SET_USERS, SET_DETAILS, EDITION_MENU_IS_VISIBLE} from '../../redux/action-types';
+import {SET_USERS, SET_DETAILS, EDITION_MENU_IS_VISIBLE, CREATION_MENU_IS_VISIBLE} from '../../redux/action-types';
+import CreateUserWindow from "../createUser-window/CreateUserWindow";
 
 function RenderUserList({match: {url}}) {
     const {users} = useSelector(({users_State: {users}}) => ({users}));
@@ -26,6 +27,8 @@ function RenderUserList({match: {url}}) {
     ({detailUserInfo}));
     const {editUserWindow} = useSelector(({editUserWindow_State: {editUserWindow}}) =>
     ({editUserWindow}));
+    const {createUserWindow} = useSelector(({createUserWindow_State: {createUserWindow}}) =>
+        ({createUserWindow}));
 
     const dispatch = useDispatch();
 
@@ -46,14 +49,24 @@ function RenderUserList({match: {url}}) {
 
     const saveEditedUser = (btnName, editedUser) => {
         if (btnName === 'save') {
-            console.log('editedUser saveEditedUser');
-            console.log(editedUser);
             const newUserList = users.filter(user => user.id !== editedUser.id);
             newUserList.push(editedUser);
-            console.log(newUserList)
+            newUserList.sort((a, b) => a.id - b.id)
             dispatch({type: SET_USERS, payload: newUserList});
+            dispatch({type: SET_DETAILS, payload: editedUser})
+        } dispatch({type: 'EDITION_MENU_IS_VISIBLE', payload: ''});
+    };
 
-        }
+    const showCreateUserWindow = () => {
+        dispatch({type: CREATION_MENU_IS_VISIBLE, payload: 'visible'});
+    };
+
+    const createUser = (btnName, createdUser) => {
+        if (btnName === 'create') {
+            createdUser.id = users[users.length - 1].id + 1;
+            users.push(createdUser);
+            dispatch({type: SET_USERS, payload: users});
+        } dispatch({type: 'CREATION_MENU_IS_VISIBLE', payload: ''});
     }
 
     useEffect(() => {
@@ -67,11 +80,11 @@ function RenderUserList({match: {url}}) {
                 <div>
                     <h3>USERS LIST:</h3>
                     {!!users && users.map(user => <RenderUser user={user} key={user.id} showDetails={showDetails}/>)}
-                    <button>Create User</button>
+                    <button onClick={showCreateUserWindow}>Create User</button>
                 </div>
                 {!!detailUserInfo && <ProvideDetails detailUserInfo={detailUserInfo} showEditUserWindow={showEditUserWindow} deleteUser={deleteUser}/>}
                 {!!editUserWindow && <EditUserWindow detailUserInfo={detailUserInfo} saveEditedUser={saveEditedUser}/>}
-                <div>1</div>
+                {!!createUserWindow && <CreateUserWindow createUser={createUser}/>}
             </div>
         );
     } return (
