@@ -1,9 +1,5 @@
-export const SET_USERS = 'SET_USERS';
-export const SET_DETAILS = 'SET_DETAILS';
-export const EDITION_MENU_IS_VISIBLE = 'EDITION_MENU_IS_VISIBLE';
-export const INPUT_NAME = 'INPUT_NAME';
-export const INPUT_USERNAME = 'INPUT_USERNAME';
-export const INPUT_EMAIL = 'INPUT_EMAIL';
-export const INPUT_PHONE = 'INPUT_PHONE';
-export const INPUT_WEBSITE = 'INPUT_WEBSITE';
-export const CREATION_MENU_IS_VISIBLE = 'CREATION_MENU_IS_VISIBLE';
+export * from './apiTypes';
+export * from './createTypes';
+export * from './detailInfoTypes';
+export * from './editTypes';
+export * from './userTypes';
