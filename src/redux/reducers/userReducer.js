@@ -3,7 +3,8 @@ import {
     INPUT_USERNAME,
     INPUT_EMAIL,
     INPUT_PHONE,
-    INPUT_WEBSITE
+    INPUT_WEBSITE,
+    INPUT_ID
 } from '../action-types';
 
 const initialState = {
@@ -29,6 +30,8 @@ export default (state = initialState, action) => {
             { ...state.singleUser, phone: action.payload}};
         case INPUT_WEBSITE: return { ...state, singleUser:
                 { ...state.singleUser, website: action.payload}};
+        case INPUT_ID: return { ...state, singleUser:
+                { ...state.singleUser, id: action.payload}};
         default: return state;
     }
 }

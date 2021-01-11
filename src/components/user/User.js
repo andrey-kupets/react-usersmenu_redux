@@ -1,4 +1,4 @@
-export default function RenderUser(user, showDetails) {
+export default function RenderUser({user, showDetails}) {
     // const {user: {id, name}, user, showDetails} = props;
     const {id, name} = user;
     return (

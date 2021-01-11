@@ -49,6 +49,7 @@ function RenderUserList({match: {url}}) {
     };
 
     const saveEditedUser = (btnName, editedUser) => {
+        console.log(editedUser);
         if (btnName === 'save') {
             const newUserList = users.filter(user => user.id !== editedUser.id);
             newUserList.push(editedUser);
@@ -74,15 +75,19 @@ function RenderUserList({match: {url}}) {
 
     useEffect(() => {
     // const {match: {url}} = props;
-    actFetchApi(url).then(json => dispatch(setUsers(json)));
+    actFetchApi(url).then(data => {
+        console.log('actFetchApi', data);
+        dispatch(setUsers(data))
+    });
     }, []);
-
+    console.log('detailUserInfo RenderUserList');
+    console.log(detailUserInfo);
     if (!!users) {
         return (
             <div className={'parent'}>
                 <div>
                     <h3>USERS LIST:</h3>
-                    {!!users && users.map(user => <RenderUser user={user} key={user.id} showDetails={showDetails}/>)}
+                    {users.map(user => <RenderUser user={user} key={user.id} showDetails={showDetails}/>)}
                     <button onClick={showCreateUserWindow}>Create User</button>
                 </div>
                 {!!detailUserInfo && <ProvideDetails detailUserInfo={detailUserInfo} showEditUserWindow={showEditUserWindow} deleteUser={deleteUser}/>}
