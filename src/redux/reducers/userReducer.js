@@ -29,9 +29,9 @@ export default (state = initialState, action) => {
         case INPUT_PHONE: return { ...state, singleUser:
             { ...state.singleUser, phone: action.payload}};
         case INPUT_WEBSITE: return { ...state, singleUser:
-                { ...state.singleUser, website: action.payload}};
+            { ...state.singleUser, website: action.payload}};
         case INPUT_ID: return { ...state, singleUser:
-                { ...state.singleUser, id: action.payload}};
+            { ...state.singleUser, id: action.payload}};
         default: return state;
     }
 }

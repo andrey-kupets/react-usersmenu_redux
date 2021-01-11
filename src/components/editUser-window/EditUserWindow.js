@@ -2,16 +2,33 @@ import { useDispatch, useSelector } from "react-redux";
 import { useReducer } from 'react';
 
 import { INPUT_NAME, INPUT_USERNAME, INPUT_EMAIL, INPUT_PHONE, INPUT_WEBSITE} from '../../redux/action-types';
-import {setNewName, setNewUsername, setNewEmail, setNewPhone, setNewWebsite,setID} from '../../redux/action-creators';
+import {
+    setNewName,
+    setNewUsername,
+    setNewEmail,
+    setNewPhone,
+    setNewWebsite,
+    setID,
+    setUpdateUser,
+    setEdit
+} from '../../redux/action-creators';
 
 export default function EditUserWindow({detailUserInfo}) {
-    const {name, username, email, phone, website,id} = detailUserInfo;
+    const {name, username, email, phone, website, id} = detailUserInfo;
     const singleUser = useSelector(({singleUser_State: {singleUser}}) => singleUser);
     const dispatch = useDispatch();
 
     // dispatch(setID(id))
 
-    const inputName = ({target: { value}}) => dispatch(setNewName(value));
+    const inputName = ({target: { value, defaultValue}}, e) => {
+        console.log(value, 'value')
+        console.log(defaultValue, 'defvalue')
+        console.log(e, 'e')
+        if (value) {
+            dispatch(setNewName(defaultValue))
+        }
+        dispatch(setNewName(value))
+};
     const inputUsername = ({target: { value}}) => dispatch(setNewUsername(value));
     const inputEmail = ({target: { value}}) => dispatch(setNewEmail(value));
     const inputPhone = ({target: { value}}) => dispatch(setNewPhone(value));
@@ -63,9 +80,11 @@ export default function EditUserWindow({detailUserInfo}) {
             </div>
             <div>
                 <button onClick={() => {
-                    dispatch({type: 'UPDATE_USER', payload: {...singleUser, id: detailUserInfo.id}})
+                    dispatch(setUpdateUser({...singleUser, id}))
                 }}>Save</button>
-                {/*<button onClick={saveEditedUser}>Cancel</button>*/}
+                <button onClick={() => {
+                    dispatch(setEdit(''))
+                }}>Cancel</button>
             </div>
         </div>
     )
